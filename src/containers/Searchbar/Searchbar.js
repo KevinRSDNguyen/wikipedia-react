@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './Searchbar.css';
 
 class Searchbar extends Component {
   state = {
@@ -33,6 +34,7 @@ class Searchbar extends Component {
     return (
       <form onSubmit={this.onFormSubmit}>
         <input
+          id="search-box"
           type="text"
           autoFocus
           value={this.state.searchTerm}
