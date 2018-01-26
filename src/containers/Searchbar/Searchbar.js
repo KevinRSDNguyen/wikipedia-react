@@ -14,7 +14,7 @@ class Searchbar extends Component {
   }
   onFormSubmit = (e) => {
     e.preventDefault();
-    const url = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${this.state.searchTerm}&format=json&callback=?`;
+    const url = `https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${this.state.searchTerm}&format=json`;
     console.log(url);
     axios.get(url)
     .then(({data}) => {
@@ -32,7 +32,7 @@ class Searchbar extends Component {
       });
     })
     .catch(error => {
-      alert('Your search term returned no results');
+      alert(error);
     });
   }
   render() {
