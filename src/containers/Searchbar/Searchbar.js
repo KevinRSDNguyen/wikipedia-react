@@ -3,8 +3,7 @@ import axios from 'axios';
 
 class Searchbar extends Component {
   state = {
-    searchTerm: '',
-    results: []
+    searchTerm: ''
   }
   onInputChange = (e) => {
     this.setState({searchTerm: e.target.value});
@@ -15,7 +14,6 @@ class Searchbar extends Component {
   onFormSubmit = (e) => {
     e.preventDefault();
     const url = `https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${this.state.searchTerm}&format=json`;
-    console.log(url);
     axios.get(url)
     .then(({data}) => {
       let results = [];
@@ -24,12 +22,8 @@ class Searchbar extends Component {
           this.createResultObj(data[1][i], data[2][i], data[3][i])
         );
       });
-      this.setState((prevState) => {
-        return {results};
-      }, () => {
-        this.props.setResults(this.state.results);
-        this.setState({results: [], searchTerm: ''});
-      });
+      this.props.setResults(results);
+      this.setState({searchTerm: ''});
     })
     .catch(error => {
       alert(error);
